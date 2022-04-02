@@ -30,7 +30,10 @@ namespace ControlRobotApi.Controllers.arms.left
         [HttpPut]
         public IActionResult AttState([FromBody] StateRightElbowModel newState)
         {
-            _service.Update(newState);
+            Result res = _service.Update(newState);
+
+            if (res.IsFailed) return Problem();
+
             return NoContent();
         }
     }

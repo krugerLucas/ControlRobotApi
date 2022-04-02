@@ -26,14 +26,19 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateLeftWristModel newStateWrist)
         {
-            if (_state.stateLeftelbow != "Fortemente Contraído")
-            {
-                return Result.Fail("Cotovelo não está fortemente contraído");
-            }
+            if(newStateWrist.stateLeftWrist == (_state.stateLeftWrist + 1) ^ newStateWrist.stateLeftWrist == (_state.stateLeftWrist - 1)){
+                if (_state.stateLeftelbow != 4)
+                {
+                    return Result.Fail("Cotovelo não está fortemente contraído");
+                }
 
             _state.stateRightWrist = newStateWrist.stateLeftWrist;
             _context.SaveChanges();
             return Result.Ok();
+            }
+
+            return Result.Fail("Operação inválida");
+            
         }
     }
 }

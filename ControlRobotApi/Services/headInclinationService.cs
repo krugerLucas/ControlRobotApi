@@ -1,4 +1,5 @@
 ﻿using ControlRobotApi.Models;
+using FluentResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace ControlRobotApi.Services
         {
             Context = context;
             State = Context.States.FirstOrDefault(state => state.Id == 1);
-        }
 
+        }
         public StateInclinationModel List()
         {
             StateInclinationModel state = new StateInclinationModel();
@@ -23,10 +24,16 @@ namespace ControlRobotApi.Services
             return state;
         }
 
-        public void Update(StateInclinationModel newStateInclination)
+        public Result Update(StateInclinationModel newStateInclination)
         {
-            State.stateHeadInclination = newStateInclination.stateHeadInclination;
-            Context.SaveChanges();
+            if(newStateInclination.stateHeadInclination == (State.stateHeadInclination + 1) ^ newStateInclination.stateHeadInclination == (State.stateHeadInclination - 1))
+            {
+                State.stateHeadInclination = newStateInclination.stateHeadInclination;
+                Context.SaveChanges();
+                return Result.Ok();
+            }
+
+            return Result.Fail("Operação Inválida");
         }
     }
 }

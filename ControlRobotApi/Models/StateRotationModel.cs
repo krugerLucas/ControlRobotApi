@@ -8,6 +8,6 @@ namespace ControlRobotApi.Models
 {
     public class StateRotationModel
     {
-        public string stateHeadRotation { get; set; } 
+        public int stateHeadRotation { get; set; } 
     }
 }

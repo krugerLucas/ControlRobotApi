@@ -26,15 +26,19 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateRotationModel newStateRotation)
         {
-
-            if(State.stateHeadInclination == "Para Baixo")
+            if (newStateRotation.stateHeadRotation == (State.stateHeadRotation + 1) ^ newStateRotation.stateHeadRotation == (State.stateHeadRotation - 1))
             {
-                return Result.Fail("Não é permitido rotacionar com cabeça inclinada para baixo");
+                if (State.stateHeadInclination == 3)
+                {
+                    return Result.Fail("Não é permitido rotacionar com cabeça inclinada para baixo");
+                }
+
+                State.stateHeadRotation = newStateRotation.stateHeadRotation;
+                Context.SaveChanges();
+                return Result.Ok();
             }
 
-            State.stateHeadRotation = newStateRotation.stateHeadRotation;
-            Context.SaveChanges();
-            return Result.Ok();
+            return Result.Fail("Operação inválida");
         }
     }
 }

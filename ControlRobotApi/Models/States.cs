@@ -10,11 +10,11 @@ namespace ControlRobotApi.Models
     {
         [Key]
         public int Id { get; set; }
-        public string stateLeftelbow { get; set; }
-        public string stateLeftWrist { get; set; }
-        public string stateRightelbow { get; set; } 
-        public string stateRightWrist { get; set; } 
-        public string stateHeadInclination { get; set; } 
-        public string stateHeadRotation{ get; set; } 
+        public int stateLeftelbow { get; set; }
+        public int stateLeftWrist { get; set; }
+        public int stateRightelbow { get; set; } 
+        public int stateRightWrist { get; set; } 
+        public int stateHeadInclination { get; set; } 
+        public int stateHeadRotation { get; set; } 
     }
 }

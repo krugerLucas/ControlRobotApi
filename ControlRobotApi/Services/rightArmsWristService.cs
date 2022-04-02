@@ -24,16 +24,22 @@ namespace ControlRobotApi.Services
             return state;
         }
 
-        public Result Update(StateRightWristModel newStateInclination)
+        public Result Update(StateRightWristModel newStateWrist)
         {
-            if(_state.stateRightelbow != "Fortemente Contraído")
+            if (newStateWrist.stateRightWrist == (_state.stateRightWrist + 1) ^ newStateWrist.stateRightWrist == (_state.stateRightWrist - 1))
             {
-                return Result.Fail("Cotovelo não está fortemente contraído");
+                if (_state.stateRightelbow != 4)
+                {
+                    return Result.Fail("Cotovelo não está fortemente contraído");
+                }
+
+                _state.stateRightWrist = newStateWrist.stateRightWrist;
+                _context.SaveChanges();
+                return Result.Ok();
             }
 
-            _state.stateRightWrist = newStateInclination.stateRightWrist;
-            _context.SaveChanges();
-            return Result.Ok();
+            return Result.Fail("Operação inválida");
+            
         }
     }
 }

@@ -8,6 +8,6 @@ namespace ControlRobotApi.Models
 {
     public class StateLeftElbowModel
     {
-        public string stateLeftelbow { get; set; }
+        public int stateLeftelbow { get; set; }
     }
 }

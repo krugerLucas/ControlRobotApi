@@ -1,5 +1,6 @@
 ﻿using ControlRobotApi.Models;
 using ControlRobotApi.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,10 @@ namespace ControlRobotApi.Controllers.head
         [HttpPut]
         public IActionResult AttState([FromBody] StateInclinationModel newState)
         {
-            _service.Update(newState);
+            Result res = _service.Update(newState);
+
+            if (res.IsFailed) return Problem();
+
             return NoContent();
         }
     }

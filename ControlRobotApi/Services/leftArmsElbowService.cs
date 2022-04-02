@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentResults;
 
 namespace ControlRobotApi.Services
 {
@@ -23,10 +24,16 @@ namespace ControlRobotApi.Services
             return state;
         }
 
-        public void Update(StateLeftElbowModel newStateEblow)
+        public Result Update(StateLeftElbowModel newStateEblow)
         {
-            State.stateLeftelbow = newStateEblow.stateLeftelbow;
-            Context.SaveChanges();
+            if(newStateEblow.stateLeftelbow == (State.stateLeftelbow + 1) ^ newStateEblow.stateLeftelbow == (State.stateLeftelbow - 1))
+            {
+                State.stateLeftelbow = newStateEblow.stateLeftelbow;
+                Context.SaveChanges();
+                return Result.Ok();
+                
+            }
+            return Result.Fail("Operação inválida");
         }
     }
 }
