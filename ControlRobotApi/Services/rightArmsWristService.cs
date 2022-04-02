@@ -26,7 +26,7 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateRightWristModel newStateWrist)
         {
-            if (newStateWrist.stateRightWrist == (_state.stateRightWrist + 1) ^ newStateWrist.stateRightWrist == (_state.stateRightWrist - 1))
+            if ((newStateWrist.stateRightWrist == (_state.stateRightWrist + 1) || newStateWrist.stateRightWrist == (_state.stateRightWrist - 1)) && newStateWrist.stateRightWrist < 8)
             {
                 if (_state.stateRightelbow != 4)
                 {

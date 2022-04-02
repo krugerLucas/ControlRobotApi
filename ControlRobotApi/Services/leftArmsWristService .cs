@@ -26,7 +26,8 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateLeftWristModel newStateWrist)
         {
-            if(newStateWrist.stateLeftWrist == (_state.stateLeftWrist + 1) ^ newStateWrist.stateLeftWrist == (_state.stateLeftWrist - 1)){
+            if((newStateWrist.stateLeftWrist == (_state.stateLeftWrist + 1) || newStateWrist.stateLeftWrist == (_state.stateLeftWrist - 1)) && newStateWrist.stateLeftWrist < 8)
+            {
                 if (_state.stateLeftelbow != 4)
                 {
                     return Result.Fail("Cotovelo não está fortemente contraído");
