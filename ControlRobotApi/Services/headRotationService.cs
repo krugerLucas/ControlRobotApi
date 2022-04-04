@@ -26,7 +26,7 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateRotationModel newStateRotation)
         {
-            if ((newStateRotation.stateHeadRotation == (State.stateHeadRotation + 1) || newStateRotation.stateHeadRotation == (State.stateHeadRotation - 1)) && newStateRotation.stateHeadRotation < 6)
+            if ((newStateRotation.stateHeadRotation == (State.stateHeadRotation + 1) || newStateRotation.stateHeadRotation == (State.stateHeadRotation - 1)) && newStateRotation.stateHeadRotation < 6 && newStateRotation.stateHeadRotation > 0)
             {
                 if (State.stateHeadInclination == 3)
                 {

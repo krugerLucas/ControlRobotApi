@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Cors;
 
 namespace ControlRobotApi
 {
@@ -36,12 +37,26 @@ namespace ControlRobotApi
             services.AddTransient<rightArmsElbowService>();
             services.AddTransient<rightArmsWristService>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "MyPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                                
+                    });
+            });
+
             services.AddDbContext<Context>(options => options.UseSqlite(Configuration.GetConnectionString("sqliteConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ControlRobotApi", Version = "v1" });
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +72,9 @@ namespace ControlRobotApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
+            
 
             app.UseAuthorization();
 

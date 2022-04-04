@@ -26,7 +26,7 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateRightElbowModel newStateInclination)
         {
-            if((newStateInclination.stateRightelbow == (_state.stateRightelbow + 1) || newStateInclination.stateRightelbow == (_state.stateRightelbow - 1)) && newStateInclination.stateRightelbow < 5)
+            if((newStateInclination.stateRightelbow == (_state.stateRightelbow + 1) || newStateInclination.stateRightelbow == (_state.stateRightelbow - 1)) && newStateInclination.stateRightelbow < 5 && newStateInclination.stateRightelbow > 0)
             {
                 _state.stateRightelbow = newStateInclination.stateRightelbow;
                 _context.SaveChanges();

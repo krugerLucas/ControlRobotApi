@@ -26,7 +26,7 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateLeftElbowModel newStateEblow)
         {
-            if((newStateEblow.stateLeftelbow == (State.stateLeftelbow + 1) || newStateEblow.stateLeftelbow == (State.stateLeftelbow - 1)) && newStateEblow.stateLeftelbow < 5)
+            if((newStateEblow.stateLeftelbow == (State.stateLeftelbow + 1) || newStateEblow.stateLeftelbow == (State.stateLeftelbow - 1)) && newStateEblow.stateLeftelbow < 5 && newStateEblow.stateLeftelbow > 0)
             {
                 State.stateLeftelbow = newStateEblow.stateLeftelbow;
                 Context.SaveChanges();

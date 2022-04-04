@@ -1,6 +1,7 @@
 ﻿using ControlRobotApi.Models;
 using ControlRobotApi.Services;
 using FluentResults;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ControlRobotApi.Controllers.arms.left
 {
+    [EnableCors("MyPolicy")]
     [ApiController]
     [Route("[Controller]")]
     public class StateLeftArmsWristController : ControllerBase
@@ -21,12 +23,14 @@ namespace ControlRobotApi.Controllers.arms.left
         {
             _service = service;
         }
+
         [HttpGet]
         public IActionResult ListState()
         {
             StateLeftWristModel ReturnState = _service.List();
             return Ok(ReturnState);
         }
+
         [HttpPut]
         public IActionResult AttState([FromBody] StateLeftWristModel newState)
         {

@@ -26,7 +26,7 @@ namespace ControlRobotApi.Services
 
         public Result Update(StateInclinationModel newStateInclination)
         {
-            if((newStateInclination.stateHeadInclination == (State.stateHeadInclination + 1) || newStateInclination.stateHeadInclination == (State.stateHeadInclination - 1)) && newStateInclination.stateHeadInclination < 4)
+            if((newStateInclination.stateHeadInclination == (State.stateHeadInclination + 1) || newStateInclination.stateHeadInclination == (State.stateHeadInclination - 1)) && newStateInclination.stateHeadInclination < 4 && newStateInclination.stateHeadInclination > 0)
             {
                 State.stateHeadInclination = newStateInclination.stateHeadInclination;
                 Context.SaveChanges();

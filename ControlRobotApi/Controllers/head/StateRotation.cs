@@ -1,6 +1,7 @@
 ﻿using ControlRobotApi.Models;
 using ControlRobotApi.Services;
 using FluentResults;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ControlRobotApi.Controllers.head
 {
+    [EnableCors("MyPolicy")]
     [ApiController]
     [Route("[Controller]")]
     public class StateRotationController : ControllerBase
